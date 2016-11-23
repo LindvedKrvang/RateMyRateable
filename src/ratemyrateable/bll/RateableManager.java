@@ -5,12 +5,14 @@
  */
 package ratemyrateable.bll;
 
-import java.util.HashMap;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import ratemyrateable.be.Rateable;
+import ratemyrateable.dal.RateDAO;
 
 /**
  *
@@ -18,6 +20,12 @@ import ratemyrateable.be.Rateable;
  */
 public class RateableManager
 {
+    private RateDAO rateDAO;
+    
+    public RateableManager()
+    {
+        rateDAO = new RateDAO();
+    }
 
     public Rateable creatNewRateable(String description, double rate)
     {
@@ -72,5 +80,10 @@ public class RateableManager
             distribution.put(rate.getRate(), occurencesOfRate);
         }
         return distribution;
+    }
+    
+    public void saveGameRating(ArrayList<Rateable> rating) throws FileNotFoundException
+    {
+        rateDAO.saveFile(rating);
     }
 }

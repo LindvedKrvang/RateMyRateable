@@ -5,11 +5,16 @@
  */
 package ratemyrateable.gui.controllers;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -165,7 +170,14 @@ public class RateController implements Initializable
     @FXML
     private void handleSaveRatings(ActionEvent event)
     {
-        //TODO Save all ratings to file!
+        try
+        {
+            ArrayList<Rateable> listOfAllRateabel = rateMyModel.getGameRatings();
+            rateManager.saveGameRating(listOfAllRateabel);
+        } catch (FileNotFoundException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**
@@ -186,5 +198,4 @@ public class RateController implements Initializable
         chartRatingDistribution.getYAxis().setLabel("Occurences");
         chartRatingDistribution.getYAxis().autoRangingProperty().set(true);
     }
-    
 }

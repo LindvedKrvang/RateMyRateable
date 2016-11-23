@@ -5,6 +5,7 @@
  */
 package ratemyrateable.gui.models;
 
+import java.util.ArrayList;
 import java.util.Map;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -142,6 +143,14 @@ public class RateMyModel
     public ObservableList<Series<Double, Integer>> getDistributionData()
     {
         return chartDistributionData;
+    }
+    
+    public ArrayList<Rateable> getGameRatings() {
+        ArrayList<Rateable> gameRatings = new ArrayList<>();
+        for (Rateable rating : allRateables) {
+            gameRatings.add(rating);
+        }
+        return gameRatings;
     }
 
 }
